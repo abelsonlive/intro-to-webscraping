@@ -2,6 +2,8 @@ import requests
 from bs4 import BeautifulSoup
 import csv
 
+output_file = 'abuja-mou-data.csv'
+
 url = 'http://abuja.marinet.ru/public.php/?action=getinsppublicall'
 
 form = {
@@ -36,12 +38,12 @@ for raw_row in raw_rows:
             clean_row.append(value)
     data.append(clean_row)
 
-print "WRITING abuja-data.csv to file"
+print "WRITING {} to file".format(output_file)
 headers = [ 
     "date_of_inspection", "place_of_inspection", "name", 
     "call_sign", "flag", "imo", "deficiencies", "detained"
 ]
 
-writer = csv.writer(open('abuja-data.csv', 'wb'))
+writer = csv.writer(open(output_file, 'wb'))
 writer.writerow(headers)
 writer.writerows(data)
